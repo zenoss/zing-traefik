@@ -1,0 +1,8 @@
+version: "3"
+services:
+  traefik:
+    image: zenoss/zing-traefik:dev
+    build: .
+    command: --docker --web
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:rw

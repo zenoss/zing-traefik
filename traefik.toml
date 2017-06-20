@@ -1,0 +1,6 @@
+defaultEntryPoints = ["http", "https"]
+[entryPoints]
+  [entryPoints.http]
+  address = ":8000"
+  [entryPoints.https]
+  address = ":8443"
