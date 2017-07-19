@@ -1,0 +1,6 @@
+version: "3.2"
+services:
+  gw-service:
+    image: ${REMOTE_IMAGE}
+  gw-back:
+    image: ${REMOTE_IMAGE}
