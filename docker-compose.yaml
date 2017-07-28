@@ -11,5 +11,9 @@ services:
         zenoss.zing.build_number: ${BUILD_ID:-none}
         zenoss.zing.build_url: ${BUILD_URL:-none}
     command: --docker --web
+    healthcheck:
+      test: curl -si http://localhost:8080/ping | grep -q "HTTP/1.1 200 OK"
+    ports: 
+    - 8080:8080     # admin
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock:rw
