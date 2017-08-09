@@ -28,10 +28,12 @@ build: $(DOCKER_COMPOSE)
 run: $(DOCKER_COMPOSE)
 	@$(DOCKER_COMPOSE_BASE) up --build
 
-.PHONY: clean
-clean:
-	rm -f ci/version.yml
+.PHONY: down
+down:
 	$(DOCKER_COMPOSE_BASE) down
+
+.PHONY: clean
+clean:: down
 
 .PHONY: mrclean
 mrclean: clean
