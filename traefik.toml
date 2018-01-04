@@ -4,3 +4,7 @@ defaultEntryPoints = ["http", "https"]
   address = ":8000"
   [entryPoints.https]
   address = ":8443"
+
+[web]
+  address = ":8080"
+  readOnly = true
