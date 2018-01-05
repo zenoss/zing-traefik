@@ -1,4 +1,4 @@
-FROM traefik:1.2.3-alpine
+FROM traefik:1.4.6-alpine
 
 # development tools
 RUN apk add --no-cache bind-tools curl bash
