@@ -1,0 +1,6 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- gw-private-ingress-controller-traefik.yaml
+- gw-public.yaml
+- service-account.yaml
