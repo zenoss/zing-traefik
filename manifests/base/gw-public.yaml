@@ -1,0 +1,53 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: gw-public
+spec:
+  selector:
+    app: gw-public
+  ports:
+  - port: 8000
+    nodePort: 32600
+    name: web
+  - port: 8080
+    nodePort: 32680
+    name: admin
+  type: NodePort
+---
+kind: Deployment
+apiVersion: apps/v1beta1
+metadata:
+  name: gw-public
+  labels:
+    app: gw-public
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gw-public
+    spec:
+      serviceAccountName: traefik-ingress-controller
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: gw-public
+        image: zing-traefik
+        securityContext:
+          readOnlyRootFilesystem: true
+          runAsUser: 512
+        args:
+        - --web
+        - --kubernetes
+        - --kubernetes.labelselector=public-api=true
+        - --loglevel=INFO
+        - --insecureSkipVerify=true
+        ports:
+        - containerPort: 8000
+          name: web
+        - containerPort: 8080
+          name: admin
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: 8080

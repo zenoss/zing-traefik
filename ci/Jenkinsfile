@@ -23,5 +23,20 @@ node('docker') {
         stage('Build image') {
             sh("${MAKE} build")
         }
+
+        stage("Validate Manifests") {
+            build job: env.GLOBAL_KUSTOMIZE_PROOFING_JOB,
+                wait: true,
+                propagate: true,
+                parameters: [
+                    text(name: 'SERVICE_NAME', value: "zing-traefik"),
+                    text(name: 'SERVICE_GIT', value: "https://github.com/zenoss/zing-traefik"),
+                    text(name: 'SERVICE_GIT_SHA', value: env.GIT_BRANCH),
+                    text(name: 'UPSTREAM_JOB_NAME', value: env.JOB_NAME),
+                    text(name: 'UPSTREAM_JOB_NUMBER', value: env.BUILD_NUMBER),
+                    text(name: 'UPSTREAM_JOB_URL', value: env.BUILD_URL),
+                ]
+        }
     }
+
 }
