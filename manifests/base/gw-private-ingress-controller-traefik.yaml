@@ -5,6 +5,9 @@ metadata:
   labels:
     k8s-app: gw-private-ingress-lb
 spec:
+  selector:
+    matchLabels:
+      app: gw-private-ingress-lb
   updateStrategy:
     type: RollingUpdate
   template:
