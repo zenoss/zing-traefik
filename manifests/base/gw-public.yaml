@@ -22,6 +22,9 @@ metadata:
   labels:
     app: gw-public
 spec:
+  selector:
+    matchLabels:
+      app: gw-public
   replicas: 1
   template:
     metadata:
