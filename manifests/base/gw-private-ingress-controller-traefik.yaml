@@ -52,5 +52,3 @@ spec:
         resources:
           requests:
             memory: 750M
-          limits:
-            memory: 1G
